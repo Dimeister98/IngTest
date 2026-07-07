@@ -1,24 +1,23 @@
 package org.example.ingtest.mapper;
 
 import org.example.ingtest.dto.ProductDto;
+import org.example.ingtest.dto.ProductPatchDto;
 import org.example.ingtest.model.Product;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
-@Component
-public class ProductMapper {
 
-    public static Product toEntity(ProductDto productDto) {
-        var product = new Product();
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+public interface ProductMapper {
 
-        product.setDescription(productDto.description());
-        product.setName(productDto.name());
-        product.setPrice(productDto.price());
-        product.setQuantity(productDto.quantity());
+    @Mapping(target = "uuid", ignore = true)
+    Product toEntity(ProductDto productDto);
 
-        return product;
-    }
+    @Mapping(source = "uuid", target = "id")
+    ProductDto toDto(Product product);
 
-    public static ProductDto toDto(Product product) {
-        return new ProductDto(product.getUuid(), product.getName(), product.getDescription(), product.getPrice(), product.getQuantity());
-    }
+    @Mapping(target = "uuid", ignore = true)
+    void applyPatch(@MappingTarget Product product, ProductPatchDto productPatchDto);
 }

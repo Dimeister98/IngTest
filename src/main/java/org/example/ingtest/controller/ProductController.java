@@ -2,6 +2,7 @@ package org.example.ingtest.controller;
 
 import jakarta.validation.Valid;
 import org.example.ingtest.dto.ProductDto;
+import org.example.ingtest.dto.ProductPatchDto;
 import org.example.ingtest.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,5 +34,10 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<ProductDto> addProduct(@Valid @RequestBody ProductDto dto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.addProduct(dto));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<ProductDto> patchProduct(@PathVariable UUID id, @RequestBody ProductPatchDto dto) {
+        return ResponseEntity.ok(productService.patchProduct(id, dto));
     }
 }
