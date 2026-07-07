@@ -1,3 +1,14 @@
 spring:
   application:
     name: IngTest
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ing
+    username: user
+    password: pwd
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
