@@ -8,6 +8,7 @@ import org.example.ingtest.mapper.ProductMapper;
 import org.example.ingtest.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.UUID;
@@ -25,15 +26,16 @@ public class ProductServiceImpl implements ProductService{
 
     @Transactional
     public List<ProductDto> findProductsByName(String name) {
-        var productList = name.isBlank() ?
-                productRepository.findAll() : productRepository.findProductsByName(name);
+        var productList = StringUtils.hasText(name)
+                ? productRepository.findProductsByName(name)
+                : productRepository.findAll();
         return productList.stream().map(productMapper::toDto).toList();
     }
 
     @Transactional
     public ProductDto getProductById(UUID uuid) {
         var product = productRepository.findById(uuid)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Product not found"));
         return productMapper.toDto(product);
     }
 
