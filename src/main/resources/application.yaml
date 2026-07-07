@@ -12,8 +12,15 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-  security:
-    user:
-      name: admin
-      password: admin
-      roles: ADMIN
+logging:
+  level:
+    org.hibernate.tool.schema: DEBUG
+jwt:
+  expiration: 86400
+  secret: zRa1Maxz94AgsKzKMkdt8kubj7SeMusWb6+wBGuCTFs=
+
+#  security:
+#    user:
+#      name: admin
+#      password: admin
+#      roles: ADMIN
