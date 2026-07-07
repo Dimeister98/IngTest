@@ -16,7 +16,7 @@ logging:
   level:
     org.hibernate.tool.schema: DEBUG
 jwt:
-  expiration: 86400
+  expiration: 86400000
   secret: zRa1Maxz94AgsKzKMkdt8kubj7SeMusWb6+wBGuCTFs=
 
 #  security:
