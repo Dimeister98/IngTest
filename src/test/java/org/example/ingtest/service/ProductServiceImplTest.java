@@ -6,7 +6,7 @@ import org.example.ingtest.exception.ResourceNotFoundException;
 import org.example.ingtest.mapper.ProductMapper;
 import org.example.ingtest.model.Product;
 import org.example.ingtest.repository.ProductRepository;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -42,9 +42,9 @@ public class ProductServiceImplTest {
     private static final UUID ID_1 = UUID.randomUUID();
     private static final UUID ID_2 = UUID.randomUUID();
     private static final UUID ID_3 = UUID.randomUUID();
-    private Product product;
-    private Product product2;
-    private List<Product> entityList;
+    private static Product product;
+    private static Product product2;
+    private static List<Product> entityList;
 
     private static Product product(UUID id, String name, String desc, BigDecimal price, int quantity) {
         return new Product(id, name, desc, price, quantity);
@@ -54,8 +54,8 @@ public class ProductServiceImplTest {
         return new ProductDto(id, name, desc, price, quantity);
     }
 
-    @BeforeEach
-    void add() {
+    @BeforeAll
+    static void add() {
         product = product(ID_1, PRODUCT_NAME_1, DESC_1, BigDecimal.valueOf(10.99), 10);
         product2 = product(ID_2, PRODUCT_NAME_2, DESC_2, BigDecimal.valueOf(5.99), 5);
         entityList = List.of(product, product2);
