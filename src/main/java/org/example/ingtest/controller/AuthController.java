@@ -1,5 +1,6 @@
 package org.example.ingtest.controller;
 
+import jakarta.validation.Valid;
 import org.example.ingtest.dto.LoginRequest;
 import org.example.ingtest.dto.LoginResponse;
 import org.example.ingtest.exception.TooManyAttemptsException;
@@ -32,7 +33,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
         if (loginAttemptService.isBlocked()) {
             throw new TooManyAttemptsException(loginAttemptService.getBlockDurationSecodns());
         }
