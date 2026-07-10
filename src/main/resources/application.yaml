@@ -1,10 +1,12 @@
 spring:
+  config:
+    import: "optional:file:.env[.properties]"
   application:
     name: IngTest
   datasource:
-    url: jdbc:postgresql://localhost:5432/ing
-    username: user
-    password: pwd
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -16,8 +18,8 @@ logging:
   level:
     org.hibernate.tool.schema: DEBUG
 jwt:
-  expiration: 86400000
-  secret: zRa1Maxz94AgsKzKMkdt8kubj7SeMusWb6+wBGuCTFs=
+  expiration: ${JWT_EXPIRATION}
+  secret: ${JWT_SECRET}
 
 #  security:
 #    user:
