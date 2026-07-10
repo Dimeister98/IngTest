@@ -37,7 +37,7 @@ public class ProductController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<ProductDto> patchProduct(@PathVariable UUID id, @RequestBody ProductPatchDto dto) {
+    public ResponseEntity<ProductDto> patchProduct(@PathVariable UUID id, @Valid @RequestBody ProductPatchDto dto) {
         return ResponseEntity.ok(productService.patchProduct(id, dto));
     }
 }
