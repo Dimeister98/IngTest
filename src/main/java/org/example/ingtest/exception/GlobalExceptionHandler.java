@@ -18,14 +18,14 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleEntityNotFound(ResourceNotFoundException ex) {
-        log.warn("Resource not found: {}", ex.getMessage());
+        log.error("Resource not found: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(ErrorResponse.of(HttpStatus.NOT_FOUND.value(), "Not Found", ex.getMessage()));
     }
 
     @ExceptionHandler(TooManyAttemptsException.class)
     public ResponseEntity<ErrorResponse> handleTooManyAttempts(TooManyAttemptsException ex) {
-        log.warn("Too many login attempts. User blocked for {} seconds", ex.getRetryAfterSeconds());
+        log.error("Too many login attempts. User blocked for {} seconds", ex.getRetryAfterSeconds());
         return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
                 .header(HttpHeaders.RETRY_AFTER, String.valueOf(ex.getRetryAfterSeconds()))
                 .body(ErrorResponse.of(HttpStatus.TOO_MANY_REQUESTS.value(), "Too Many Requests",
