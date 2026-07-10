@@ -28,7 +28,7 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> getProduct(@PathVariable UUID id) {
-        return ResponseEntity.ofNullable(productService.getProductById(id));
+        return ResponseEntity.ok(productService.getProductById(id));
     }
 
     @PostMapping
