@@ -26,16 +26,16 @@ public class ProductServiceImpl implements ProductService{
         this.productMapper = productMapper;
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<ProductDto> findProductsByName(String name) {
         log.debug("Finding products by name {}", name);
         var productList = StringUtils.hasText(name)
-                ? productRepository.findProductsByName(name)
+                ? productRepository.findProductsByNameIgnoreCase(name)
                 : productRepository.findAll();
         return productList.stream().map(productMapper::toDto).toList();
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public ProductDto getProductById(UUID uuid) {
         log.debug("Get products by id {}", uuid);
         var product = productRepository.findById(uuid)

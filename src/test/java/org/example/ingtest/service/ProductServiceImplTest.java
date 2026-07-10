@@ -81,7 +81,7 @@ public class ProductServiceImplTest {
     void findProductsByNameReturnsCorrectProduct() {
         var dto = dto(ID_1, PRODUCT_NAME_1, DESC_1, BigDecimal.valueOf(10.99), 10);
 
-        when(productRepository.findProductsByName(PRODUCT_NAME_1)).thenReturn(Collections.singletonList(product));
+        when(productRepository.findProductsByNameIgnoreCase(PRODUCT_NAME_1)).thenReturn(Collections.singletonList(product));
         when(productMapper.toDto(product)).thenReturn(dto);
 
         var result = productService.findProductsByName(PRODUCT_NAME_1);
