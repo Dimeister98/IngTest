@@ -26,6 +26,6 @@ public class UserServiceImpl implements UserDetailsService {
                         .password(user.getPassword())
                         .roles(user.getRole().name())
                         .build())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
+                .orElseThrow(() -> new UsernameNotFoundException("Invalid username or password"));
     }
 }
